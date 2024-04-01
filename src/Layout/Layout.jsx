@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom"
-import NavigationBar from "../Pages/Shared/NavigationBar/NavigationBar"
-import Footer from "../Pages/Shared/Footer/Footer"
+import { Outlet } from 'react-router-dom';
+import NavigationBar from '../Pages/Shared/NavigationBar/NavigationBar';
+import Footer from '../Pages/Shared/Footer/Footer';
 
 function Layout() {
   return (
-    <div className=" max-w-5xl mx-auto">
+    <div className=" max-w-7xl mx-auto">
       <NavigationBar />
       <Outlet />
       <Footer />
@@ -12,4 +12,4 @@ function Layout() {
   );
 }
 
-export default Layout
+export default Layout;

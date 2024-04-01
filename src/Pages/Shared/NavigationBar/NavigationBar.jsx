@@ -5,14 +5,20 @@ import {
   Button,
   IconButton,
   Collapse,
+  Tooltip,
+  Avatar,
 } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Hook/AuthProvider';
 
 function NavigationBar() {
   const [openNav, setOpenNav] = React.useState(false);
-  const { user } = useContext(AuthContext)
-  console.log(user);
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => console.log('current user logout successfully'))
+      .catch((error) => console.log(error));
+  };
   React.useEffect(() => {
     window.addEventListener(
       'resize',
@@ -83,29 +89,58 @@ function NavigationBar() {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-semibold md:font-bold text-2xl md:text-3xl"
           >
-            Dhuye Dibo
+            DhuyeDibo
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-3">
-              <Link to="/login">
-                <Button
-                  variant="filled"
-                  size="lg"
-                  className="hidden lg:inline-block"
-                >
-                  <span>Log In</span>
-                </Button>
-              </Link>
-              <Link to="/register">
-                <Button
-                  variant="gradient"
-                  size="lg"
-                  className="hidden lg:inline-block"
-                >
-                  <span>Sign Up</span>
-                </Button>
-              </Link>
+              <div>
+                {user?.email ? (
+                  user.email
+                ) : (
+                  <Link to="/login">
+                    <Button fullWidth variant="filled" size="lg" className="">
+                      <span>Sign In</span>
+                    </Button>
+                  </Link>
+                )}
+              </div>
+              <div>
+                {user && (
+                  <Tooltip content="Tania Andrew">
+                    <Avatar
+                      size="sm"
+                      variant="circular"
+                      alt="tania andrew"
+                      src={
+                        user?.photoURl
+                          ? user.photoURL
+                          : 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
+                      }
+                      className="border-2 border-white hover:z-10"
+                    />
+                  </Tooltip>
+                )}
+              </div>
+              <div>
+                {user ? (
+                  <Button
+                    onClick={handleLogOut}
+                    fullWidth
+                    variant="filled"
+                    size="lg"
+                    className=""
+                  >
+                    <span>LogOut</span>
+                  </Button>
+                ) : (
+                  <Link to='/register'>
+                    <Button fullWidth variant="filled" size="lg" className="">
+                      <span>Sign Up</span>
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </div>
             <IconButton
               variant="text"

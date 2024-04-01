@@ -9,7 +9,6 @@ function LogIn() {
     e.preventDefault();
     const userEmail = e.target.email.value;
     const userPassword = e.target.password.value;
-    console.log(userEmail, userPassword);
     logInUser(userEmail, userPassword)
       .then(result => console.log(result.user))
       .catch(error => console.log(error));
