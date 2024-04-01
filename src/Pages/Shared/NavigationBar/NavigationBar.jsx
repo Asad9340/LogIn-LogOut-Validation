@@ -38,26 +38,32 @@ function NavigationBar() {
           Home
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="lead"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/login" className="flex items-center">
-          LogIn
-        </Link>
-      </Typography>
-      <Typography
-        as="li"
-        variant="lead"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/register" className="flex items-center">
-          Register
-        </Link>
-      </Typography>
+      {!user ? (
+        <>
+          <Typography
+            as="li"
+            variant="lead"
+            color="blue-gray"
+            className="p-1 font-normal"
+          >
+            <Link to="/login" className="flex items-center">
+              LogIn
+            </Link>
+          </Typography>
+          <Typography
+            as="li"
+            variant="lead"
+            color="blue-gray"
+            className="p-1 font-normal"
+          >
+            <Link to="/register" className="flex items-center">
+              Register
+            </Link>
+          </Typography>
+        </>
+      ) : (
+        ''
+      )}
       <Typography
         as="li"
         variant="lead"
@@ -76,7 +82,7 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to='/orders' className="flex items-center">
+            <Link to="/orders" className="flex items-center">
               Orders
             </Link>
           </Typography>
@@ -86,7 +92,7 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to='/dashboard' className="flex items-center">
+            <Link to="/dashboard" className="flex items-center">
               Dashboard
             </Link>
           </Typography>
@@ -129,7 +135,7 @@ function NavigationBar() {
                       variant="circular"
                       alt="tania andrew"
                       src={
-                        user?.photoURl
+                        user
                           ? user.photoURL
                           : 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
                       }

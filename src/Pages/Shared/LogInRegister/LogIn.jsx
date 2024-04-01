@@ -1,7 +1,9 @@
-
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Hook/AuthProvider';
+import { Button } from '@material-tailwind/react';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import auth from '../../../Firebase/firebase.config';
 
 function LogIn() {
   const { logInUser } = useContext(AuthContext);
@@ -12,15 +14,26 @@ function LogIn() {
     const userPassword = e.target.password.value;
     logInUser(userEmail, userPassword)
       .then(() => {
-        e.target.reset()
+        e.target.reset();
+        navigate('/');
+      })
+      .catch(error => console.log(error));
+  };
+
+  const provider = new GoogleAuthProvider();
+  const handleGoogleLogIn = () => {
+    signInWithPopup(auth, provider)
+      .then(result => {
+        console.log(result.user.photoURL);
         navigate('/')
       })
       .catch(error => console.log(error));
   };
+
   return (
     <div className="flex justify-center">
       <form onSubmit={handleLogInSubmit}>
-        <div className="relative flex flex-col text-gray-700 bg-[#f0fff4] shadow-lg w-96 rounded-xl bg-clip-border p-6 mt-6">
+        <div className="relative flex flex-col text-gray-700 bg-[#f0fff4] shadow-lg w-96 md:w-[500px] rounded-xl bg-clip-border p-4 mt-6">
           <div className="relative grid mx-4 overflow-hidden text-white shadow-lg h-14 place-items-center rounded-xl bg-gradient-to-tr from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">
             <h3 className="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
               Sign In
@@ -96,7 +109,7 @@ function LogIn() {
               Sign In
             </button>
             <p className="flex justify-center mt-6 font-sans text-sm antialiased font-light leading-normal text-inherit">
-              Dont have an account?
+              Do not have an account?
               <Link
                 to="/register"
                 className="block ml-1 font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900"
@@ -104,6 +117,22 @@ function LogIn() {
                 Sign up
               </Link>
             </p>
+          </div>
+          <div className=" flex justify-center">
+            <Button
+              onClick={handleGoogleLogIn}
+              size="sm"
+              variant="outlined"
+              color="blue-gray"
+              className="flex items-center gap-3"
+            >
+              <img
+                src="https://docs.material-tailwind.com/icons/google.svg"
+                alt="metamask"
+                className="h-6 w-6"
+              />
+              Continue with Google
+            </Button>
           </div>
         </div>
       </form>
