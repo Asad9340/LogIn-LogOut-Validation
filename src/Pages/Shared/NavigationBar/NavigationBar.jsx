@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Navbar,
   Typography,
@@ -7,10 +7,12 @@ import {
   Collapse,
 } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Hook/AuthProvider';
 
 function NavigationBar() {
   const [openNav, setOpenNav] = React.useState(false);
-
+  const { user } = useContext(AuthContext)
+  console.log(user);
   React.useEffect(() => {
     window.addEventListener(
       'resize',
@@ -151,7 +153,7 @@ function NavigationBar() {
               <span>Log In</span>
             </Button>
             <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+              <span>Sign Up</span>
             </Button>
           </div>
         </Collapse>
