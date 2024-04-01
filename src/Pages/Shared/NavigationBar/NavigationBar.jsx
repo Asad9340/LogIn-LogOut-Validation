@@ -151,13 +151,18 @@ function NavigationBar() {
                     fullWidth
                     variant="filled"
                     size="lg"
-                    className=""
+                    className="hidden md:block"
                   >
                     <span>LogOut</span>
                   </Button>
                 ) : (
                   <Link to="/register">
-                    <Button fullWidth variant="filled" size="lg" className="">
+                    <Button
+                      fullWidth
+                      variant="filled"
+                      size="lg"
+                      className="hidden md:block"
+                    >
                       <span>Sign Up</span>
                     </Button>
                   </Link>
@@ -206,12 +211,28 @@ function NavigationBar() {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign Up</span>
-            </Button>
+              {user ? (
+                <Button
+                  onClick={handleLogOut}
+                  fullWidth
+                  variant="filled"
+                  size="sm"
+                  className="hidden md:block"
+                >
+                  <span>LogOut</span>
+                </Button>
+              ) : (
+                <Link to="/register">
+                  <Button
+                    fullWidth
+                    variant="filled"
+                    size="sm"
+                    className="hidden md:block"
+                  >
+                    <span>Sign Up</span>
+                  </Button>
+                </Link>
+              )}
           </div>
         </Collapse>
       </Navbar>
