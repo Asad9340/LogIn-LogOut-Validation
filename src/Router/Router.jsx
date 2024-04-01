@@ -1,9 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
-import Layout from "../Layout/Layout";
-import Homepage from "../Pages/HomePage/Homepage";
-import LogIn from "../Pages/Shared/LogInRegister/LogIn";
-import Register from "../Pages/Shared/LogInRegister/Register";
-
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from '../Layout/Layout';
+import Homepage from '../Pages/HomePage/Homepage';
+import LogIn from '../Pages/Shared/LogInRegister/LogIn';
+import Register from '../Pages/Shared/LogInRegister/Register';
+import PrivateRoute from './PrivateRoute';
+import Profile from '../Components/Profile';
+import Orders from '../Components/Orders';
+import Dashboard from '../Components/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -12,18 +15,42 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element:<Homepage/>
+        element: <Homepage />,
       },
       {
         path: '/login',
-        element:<LogIn/>
+        element: <LogIn />,
       },
       {
         path: '/register',
-        element:<Register/>
+        element: <Register />,
       },
-    ]
-  }
-])
+      {
+        path: '/profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/orders',
+        element: (
+          <PrivateRoute>
+            <Orders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard',
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+]);
 
 export default router;

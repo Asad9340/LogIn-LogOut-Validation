@@ -17,7 +17,7 @@ function NavigationBar() {
   const handleLogOut = () => {
     logOut()
       .then(() => console.log('current user logout successfully'))
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   };
   React.useEffect(() => {
     window.addEventListener(
@@ -64,20 +64,36 @@ function NavigationBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link to="/profile" className="flex items-center">
           Profile
-        </a>
+        </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="lead"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Dashboard
-        </a>
-      </Typography>
+      {user ? (
+        <>
+          <Typography
+            as="li"
+            variant="lead"
+            color="blue-gray"
+            className="p-1 font-normal"
+          >
+            <Link to='/orders' className="flex items-center">
+              Orders
+            </Link>
+          </Typography>
+          <Typography
+            as="li"
+            variant="lead"
+            color="blue-gray"
+            className="p-1 font-normal"
+          >
+            <Link to='/dashboard' className="flex items-center">
+              Dashboard
+            </Link>
+          </Typography>
+        </>
+      ) : (
+        ''
+      )}
     </ul>
   );
   return (
@@ -134,7 +150,7 @@ function NavigationBar() {
                     <span>LogOut</span>
                   </Button>
                 ) : (
-                  <Link to='/register'>
+                  <Link to="/register">
                     <Button fullWidth variant="filled" size="lg" className="">
                       <span>Sign Up</span>
                     </Button>

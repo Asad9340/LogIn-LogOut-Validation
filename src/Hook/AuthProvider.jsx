@@ -4,25 +4,30 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
-  const [user, setUser] = useState();
-  const createUser = (email,password) => {
+  const [user, setUser] = useState({});
+  const [loading,setLoading]=useState(true);
+  const createUser = (email, password) => {
+    setLoading(true)
    return createUserWithEmailAndPassword(auth, email, password);
   }
-  const logInUser = (email,password) => {
+  const logInUser = (email, password) => {
+    setLoading(true)
    return signInWithEmailAndPassword(auth, email, password);
   }
   useEffect(() => {
     const unsubscribe=onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false)
       return () => {
         unsubscribe();
       }
     })
   }, [])
   const logOut = () => {
+    setLoading(true)
     signOut(auth);
   }
-  const authInfo = {logOut, user,createUser, logInUser };
+  const authInfo = {logOut,loading, user,createUser, logInUser };
   return (
     <AuthContext.Provider value={authInfo}>
       {children}
