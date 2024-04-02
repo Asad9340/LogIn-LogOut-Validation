@@ -7,11 +7,13 @@ import PrivateRoute from './PrivateRoute';
 import Profile from '../Components/Profile';
 import Orders from '../Components/Orders';
 import Dashboard from '../Components/Dashboard';
+import Error from '../Components/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement:<Error/>,
     children: [
       {
         path: '/',
