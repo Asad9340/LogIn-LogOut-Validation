@@ -8,7 +8,7 @@ function PrivateRoute({children}) {
   if (loading) {
     return (
       <div className="flex justify-center">
-        <Button className="text-4xl text-black" variant="text" size="lg" loading={true}>
+        <Button className="text-5xl text-black" variant="text" size="lg" loading={true}>
           Loading
         </Button>
       </div>

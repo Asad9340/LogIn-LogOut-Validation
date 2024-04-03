@@ -8,7 +8,7 @@ import {
   Tooltip,
   Avatar,
 } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../Hook/AuthProvider';
 
 function NavigationBar() {
@@ -34,9 +34,16 @@ function NavigationBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/" className="flex items-center">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+              : 'flex items-center'
+          }
+        >
           Home
-        </Link>
+        </NavLink>
       </Typography>
       {!user ? (
         <>
@@ -46,9 +53,16 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to="/login" className="flex items-center">
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive
+                  ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+                  : 'flex items-center'
+              }
+            >
               LogIn
-            </Link>
+            </NavLink>
           </Typography>
           <Typography
             as="li"
@@ -56,9 +70,16 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to="/register" className="flex items-center">
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive
+                  ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+                  : 'flex items-center'
+              }
+            >
               Register
-            </Link>
+            </NavLink>
           </Typography>
         </>
       ) : (
@@ -70,9 +91,16 @@ function NavigationBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/profile" className="flex items-center">
+        <NavLink
+          to="/profile"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+              : 'flex items-center'
+          }
+        >
           Profile
-        </Link>
+        </NavLink>
       </Typography>
       {user ? (
         <>
@@ -82,9 +110,16 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to="/orders" className="flex items-center">
+            <NavLink
+              to="/orders"
+              className={({ isActive }) =>
+                isActive
+                  ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+                  : 'flex items-center'
+              }
+            >
               Orders
-            </Link>
+            </NavLink>
           </Typography>
           <Typography
             as="li"
@@ -92,9 +127,16 @@ function NavigationBar() {
             color="blue-gray"
             className="p-1 font-normal"
           >
-            <Link to="/dashboard" className="flex items-center">
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? 'flex items-center border border-red-500 px-2 rounded-md duration-300 font-semibold'
+                  : 'flex items-center'
+              }
+            >
               Dashboard
-            </Link>
+            </NavLink>
           </Typography>
         </>
       ) : (
@@ -111,7 +153,7 @@ function NavigationBar() {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-semibold md:font-bold text-2xl md:text-3xl"
           >
-            DhuyeDibo
+            FireAuthX
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
