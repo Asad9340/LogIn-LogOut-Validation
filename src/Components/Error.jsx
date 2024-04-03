@@ -20,7 +20,7 @@ function Error() {
               href="#"
               className="px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900"
             >
-              Back to homepage
+              Back to Homepage
             </a>
           </div>
         </div>
